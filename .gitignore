@@ -1,4 +1,62 @@
-node_modules
-/node_modules/
-dist
-/dist
+# -----------------------------------------------------------------------------
+# Core build and dependency directories
+# -----------------------------------------------------------------------------
+node_modules/
+vendor/
+dist/
+build/
+*.map
+
+# -----------------------------------------------------------------------------
+# OS and editor junk files
+# -----------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# IDE / Code Editor settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# -----------------------------------------------------------------------------
+# Logs and temporary files
+# -----------------------------------------------------------------------------
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# -----------------------------------------------------------------------------
+# Sass / PostCSS / Webpack intermediates
+# -----------------------------------------------------------------------------
+*.tmp
+.cache/
+.sass-cache/
+postcss.config.js.map
+*.lock
+
+# -----------------------------------------------------------------------------
+# Composer / PHP vendor files (if ever used)
+# -----------------------------------------------------------------------------
+composer.lock
+phpcs.xml
+phpunit.xml
+
+# -----------------------------------------------------------------------------
+# Ignore WordPress-specific generated files
+# -----------------------------------------------------------------------------
+style.css.map
+*.min.css
+*.min.js
+
+# -----------------------------------------------------------------------------
+# Do NOT ignore the compiled CSS/JS you need in production
+# -----------------------------------------------------------------------------
+# Keep compiled assets that WordPress enqueues for frontend
+!assets/css/main.css
+!assets/js/main.js
