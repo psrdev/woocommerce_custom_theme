@@ -180,6 +180,16 @@ require get_template_directory() . '/inc/customizer.php';
 if (defined('JETPACK__VERSION')) {
     require get_template_directory() . '/inc/jetpack.php';
 }
+function awadh_crafts_theme_setup()
+{
+    add_theme_support('custom-logo', array(
+        'height' => 100,
+        'width' => 300,
+        'flex-height' => true,
+        'flex-width' => true,
+    ));
+}
+add_action('after_setup_theme', 'awadh_crafts_theme_setup');
 
 // addding google fonts and main stylesheet
 function awadh_enqueue_assets()

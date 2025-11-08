@@ -27,13 +27,12 @@
 			<!-- Logo -->
 			<div class="site-logo">
 				<a href="<?php echo esc_url(home_url('/')); ?>">
-					<?php
-					if (has_custom_logo()) {
-						the_custom_logo();
-					} else {
-						bloginfo('name');
-					}
-					?>
+					<div class="site-logo">
+						<a href="/">
+							<img src="/wp-content/uploads/2025/11/Asset-1@2x-8-1-300x154.png" class="custom-logo"
+								alt="Site Name" />
+						</a>
+					</div>
 				</a>
 			</div>
 
