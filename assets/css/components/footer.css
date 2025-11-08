@@ -1,0 +1,135 @@
+.site-footer {
+  background: var(--color-dark);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+
+  /* subtle red glow at top edge */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-primary),
+      transparent
+    );
+    box-shadow: 0 0 20px var(--color-primary);
+    opacity: 0.4;
+  }
+
+  .footer-logo-img {
+    max-height: 48px;
+    filter: invert(1);
+  }
+
+  .footer-description {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .footer-title {
+    font-family: var(--font-heading);
+    color: var(--color-white);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: var(--space-sm);
+    position: relative;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 32px;
+      height: 2px;
+      background: var(--color-primary);
+      margin-top: 6px;
+    }
+  }
+
+  .footer-links {
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-size: 0.95rem;
+
+      &:hover {
+        color: var(--color-primary-light);
+      }
+    }
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: var(--space-xs);
+
+    .form-control {
+      border-radius: var(--radius-md);
+      border: none;
+      padding: 0.6rem 1rem;
+      font-size: 0.95rem;
+      flex: 1;
+    }
+
+    .btn {
+      border-radius: var(--radius-md);
+      font-family: var(--font-heading);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+  }
+
+  .footer-social {
+    display: flex;
+    gap: var(--space-sm);
+
+    a {
+      color: var(--color-white);
+      font-size: 1.3rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+
+      &:hover {
+        color: var(--color-primary);
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  .footer-divider {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .footer-bottom {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  @media (max-width: 768px) {
+    .newsletter-form {
+      flex-direction: column;
+
+      .btn {
+        width: 100%;
+      }
+    }
+
+    .footer-title::after {
+      margin: 4px 0 10px 0;
+    }
+  }
+}

@@ -11,24 +11,74 @@
 
 ?>
 
-	<footer id="colophon" class="site-footer">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'awadh-crafts' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'awadh-crafts' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'awadh-crafts' ), 'awadh-crafts', '<a href="http://underscores.me/">Underscores.me</a>' );
-				?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
+<footer class="site-footer pt-5 pb-4">
+	<div class="container">
+		<div class="row g-4 justify-content-between">
+
+			<!-- Brand -->
+			<div class="col-12 col-md-4 footer-brand">
+				<a href="<?php echo esc_url(home_url('/')); ?>"
+					class="footer-logo d-inline-flex align-items-center mb-3">
+					<img src="<?php echo esc_url(get_theme_file_uri('/assets/img/logo.png')); ?>" alt="Site Logo"
+						class="footer-logo-img" />
+				</a>
+				<p class="footer-description">
+					Handcrafted art & designs inspired by timeless traditions — made with passion and care.
+				</p>
+			</div>
+
+			<!-- Quick Links -->
+			<div class="col-6 col-md-2 footer-links">
+				<h4 class="footer-title">Quick Links</h4>
+				<ul class="list-unstyled">
+					<li><a href="#">Shop</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Blog</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+			</div>
+
+			<!-- Customer Care -->
+			<div class="col-6 col-md-2 footer-links">
+				<h4 class="footer-title">Customer Care</h4>
+				<ul class="list-unstyled">
+					<li><a href="#">FAQs</a></li>
+					<li><a href="#">Shipping</a></li>
+					<li><a href="#">Returns</a></li>
+					<li><a href="#">Privacy Policy</a></li>
+				</ul>
+			</div>
+
+			<!-- Newsletter -->
+			<div class="col-12 col-md-4 footer-newsletter">
+				<h4 class="footer-title">Stay Connected</h4>
+				<p>Join our newsletter for new arrivals & special offers.</p>
+				<form class="newsletter-form d-flex">
+					<input type="email" class="form-control" placeholder="Your email address" required />
+					<button type="submit" class="btn btn-primary">Subscribe</button>
+				</form>
+				<div class="footer-social mt-3">
+					<a href="#"><i class="bi bi-facebook"></i></a>
+					<a href="#"><i class="bi bi-instagram"></i></a>
+					<a href="#"><i class="bi bi-pinterest"></i></a>
+				</div>
+			</div>
+		</div>
+
+		<hr class="footer-divider mt-5 mb-3" />
+
+		<div class="footer-bottom text-center">
+			<p class="mb-0">
+				© <?php echo date('Y'); ?> <strong>Your Brand</strong>. All Rights Reserved.
+			</p>
+		</div>
+	</div>
+</footer>
+
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
 
 </body>
+
 </html>

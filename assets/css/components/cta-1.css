@@ -2,13 +2,30 @@
   position: relative;
   color: var(--color-white);
   background: var(--color-dark);
-  border-radius: var(--radius-lg);
+  /* border-radius: var(--radius-lg); */
   overflow: hidden;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 5px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-primary),
+      transparent
+    );
+    box-shadow: 0 0 20px var(--color-primary);
+    opacity: 0.4;
+  }
 
   .cta-bg {
     position: absolute;
     inset: 0;
-    background: url("https://via.placeholder.com/1600x800?text=Beautiful+Crafts")
+    background: url("http://localhost/wp-content/uploads/2025/08/Slide67-600x600.jpg")
       center/cover no-repeat;
     transform: scale(1);
     transition: transform 0.6s ease;
