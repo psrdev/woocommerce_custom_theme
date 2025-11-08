@@ -29,8 +29,8 @@
 				<a href="<?php echo esc_url(home_url('/')); ?>">
 					<div class="site-logo">
 						<a href="/">
-							<img src="/wp-content/uploads/2025/11/Asset-1@2x-8-1-300x154.png" class="custom-logo"
-								alt="Site Name" />
+							<img src="<?php echo esc_url(get_theme_file_uri('/assets/img/logo.png')); ?>"
+								class="custom-logo" alt="Site Name" />
 						</a>
 					</div>
 				</a>

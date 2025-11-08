@@ -267,3 +267,4 @@ add_filter('script_loader_tag', function ($tag, $handle, $src) {
     }
     return $tag;
 }, 10, 3);
+
