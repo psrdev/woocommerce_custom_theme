@@ -25,4 +25,43 @@
   --overlay-dark-hover: rgba(0, 0, 0, 0.6);
   --shadow-soft: 0 6px 20px rgba(0, 0, 0, 0.15);
   --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.25);
+  --bs-body-bg: var(--color-bg);
+  --bs-body-color: var(--color-text);
+  --bs-body-font-family: var(--font-body);
+
+  /* Primary Colors */
+  --bs-primary: var(--color-primary);
+  --bs-primary-rgb: 198, 40, 40; /* for rgba() support */
+
+  --bs-danger: #b71c1c;
+  --bs-success: #2e7d32;
+  --bs-info: #1565c0;
+  --bs-warning: #f9a825;
+
+  /* Neutral Colors */
+  --bs-dark: var(--color-dark);
+  --bs-light: var(--color-white);
+
+  /* Border Radius */
+  --bs-border-radius: var(--radius-md);
+  --bs-border-radius-lg: var(--radius-lg);
+  --bs-border-radius-sm: calc(var(--radius-md) / 2);
+
+  /* Shadow */
+  --bs-box-shadow: var(--shadow-soft);
+  --bs-box-shadow-lg: var(--shadow-hover);
+
+  /* Spacing & Container adjustments */
+  --bs-gutter-x: var(--space-md);
+  --bs-gutter-y: var(--space-sm);
+
+  /* Transitions */
+  --bs-transition: all var(--transition-base);
+
+  /* Typography */
+  --bs-heading-color: var(--color-dark);
+  --bs-link-color: var(--color-primary);
+  --bs-link-hover-color: var(--color-primary-light);
+  --bs-font-sans-serif: var(--font-body);
+  --bs-font-monospace: "Courier New", monospace;
 }

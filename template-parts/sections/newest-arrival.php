@@ -54,3 +54,34 @@ if ($new_products->have_posts()): ?>
         </div>
     </section>
 <?php endif; ?>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const wp_vars = { ajax_url: "<?php echo admin_url('admin-ajax.php'); ?>" };
+        const loadMoreBtn = document.querySelector("#load-more-products");
+        if (!loadMoreBtn) return;
+
+        loadMoreBtn.addEventListener("click", () => {
+            const button = loadMoreBtn;
+            const currentPage = parseInt(button.dataset.page);
+            button.disabled = true;
+            button.textContent = "Loading...";
+
+            fetch(`${wp_vars.ajax_url}?action=load_more_products&page=${currentPage + 1}`)
+                .then((res) => res.text())
+                .then((html) => {
+                    if (html.trim() !== "") {
+                        document.querySelector("#product-grid").insertAdjacentHTML("beforeend", html);
+                        button.dataset.page = currentPage + 1;
+                        button.disabled = false;
+                        button.textContent = "Load More";
+                    } else {
+                        button.remove();
+                    }
+                })
+                .catch(() => {
+                    button.textContent = "Error";
+                });
+        });
+    });
+
+</script>
