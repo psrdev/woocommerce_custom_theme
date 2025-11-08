@@ -1,34 +1,37 @@
 <?php get_header(); ?>
 
-<section class="hero-section ">
-    <div class="swiper hero-swiper">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide"
-                style="background-image:url('<?php echo get_template_directory_uri(); ?>/assets/banner/banner-1.jpg')">
-                <div class="hero-content fade-in">
-                    <h2>Premium Craft Materials</h2>
-                    <p>Discover the finest cutouts and handmade supplies for your next project.</p>
-                    <a href="/shop" class="btn btn-primary">Shop Now</a>
+<?php get_template_part('template-parts/sections/slider'); ?>
+
+<?php
+/**
+ * Template Part: Product Category Grid
+ */
+
+$categories = get_terms(array(
+    'taxonomy' => 'product_cat',
+    'hide_empty' => true,
+));
+
+if (empty($categories) || is_wp_error($categories))
+    return;
+?>
+
+<section class="product-category-grid container py-5">
+    <h2 class="section-title text-center mb-4">Shop by Category</h2>
+
+    <div class="category-grid">
+        <?php foreach ($categories as $index => $category):
+            $thumbnail_id = get_term_meta($category->term_id, 'thumbnail_id', true);
+            $image_url = wp_get_attachment_url($thumbnail_id);
+            $category_link = get_term_link($category);
+            ?>
+            <a href="<?php echo esc_url($category_link); ?>" class="category-item item-<?php echo $index % 6; ?>">
+                <div class="category-image" style="background-image:url('<?php echo esc_url($image_url); ?>');"></div>
+                <div class="category-overlay">
+                    <h3><?php echo esc_html($category->name); ?></h3>
                 </div>
-            </div>
-
-            <div class="swiper-slide"
-                style="background-image:url('<?php echo get_template_directory_uri(); ?>/assets/banner/banner-2.jpg')">
-                <div class="hero-content">
-                    <h2>For Artists & Creators</h2>
-                    <p>Bulk deals for studios and creative businesses.</p>
-                    <a href="/shop" class="btn btn-primary">Explore</a>
-                </div>
-            </div>
-
-
-        </div>
-
-        <!-- Swiper Controls -->
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
+            </a>
+        <?php endforeach; ?>
     </div>
 </section>
-
 <?php get_footer(); ?>
