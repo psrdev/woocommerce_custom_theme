@@ -1,0 +1,25 @@
+:root {
+  /* Colors */
+  --color-primary: #c62828;
+  --color-primary-light: #e53935;
+  --color-dark: #333333;
+  --color-text: #212121;
+  --color-bg: #f9f9f9;
+  --color-white: #ffffff;
+
+  /* Typography */
+  --font-heading: "Montserrat", sans-serif;
+  --font-body: "Open Sans", sans-serif;
+
+  /* Spacing (8px scale) */
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 48px;
+  --space-xl: 72px;
+
+  /* Radius and Shadows */
+  --radius: 6px;
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}

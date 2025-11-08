@@ -203,11 +203,14 @@ function awadh_enqueue_assets()
         'swiper-css',
         'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css'
     );
+    // Bootstrap Icons
+    wp_enqueue_style('bootstrap-icons', 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css');
 
     // Theme main stylesheet
     wp_enqueue_style('awadh-style', get_stylesheet_uri());
     // Main compiled PostCSS file
     wp_enqueue_style('awadh-main', get_template_directory_uri() . '/assets/css/main.css', array(), filemtime(get_template_directory() . '/assets/css/main.css'));
+
 
     // jQuery (built-in)
     wp_enqueue_script('jquery');
@@ -229,14 +232,37 @@ function awadh_enqueue_assets()
         null,
         true
     );
+    // GSAP + ScrollTrigger
+    wp_enqueue_script(
+        'gsap',
+        'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js',
+        array(),
+        null,
+        true
+    );
+    wp_enqueue_script(
+        'gsap-scrolltrigger',
+        'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js',
+        array('gsap'),
+        null,
+        true
+    );
 
     // Theme JS
     wp_enqueue_script(
         'awadh-main',
         get_template_directory_uri() . '/assets/js/main.js',
-        array('jquery', 'swiper-js'),
+        array('jquery', 'swiper-js', 'gsap', 'gsap-scrolltrigger'),
         null,
         true
     );
+
+
 }
 add_action('wp_enqueue_scripts', 'awadh_enqueue_assets');
+add_filter('script_loader_tag', function ($tag, $handle, $src) {
+    if ('awadh-main' === $handle) {
+        return '<script type="module" src="' . esc_url($src) . '"></script>' . "\n";
+    }
+    return $tag;
+}, 10, 3);

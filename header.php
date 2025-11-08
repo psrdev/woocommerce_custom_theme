@@ -10,50 +10,73 @@
  */
 
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html <?php language_attributes(); ?>>
-<head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="profile" href="https://gmpg.org/xfn/11">
 
+<head>
+	<meta charset="<?php bloginfo('charset'); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
-<?php wp_body_open(); ?>
-<div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'awadh-crafts' ); ?></a>
 
-	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$awadh_crafts_description = get_bloginfo( 'description', 'display' );
-			if ( $awadh_crafts_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $awadh_crafts_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
+	<header class="site-header fixed-top">
+		<div class="container d-flex align-items-center justify-content-between header-inner">
 
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'awadh-crafts' ); ?></button>
+			<!-- Logo -->
+			<div class="site-logo">
+				<a href="<?php echo esc_url(home_url('/')); ?>">
+					<?php
+					if (has_custom_logo()) {
+						the_custom_logo();
+					} else {
+						bloginfo('name');
+					}
+					?>
+				</a>
+			</div>
+
+			<!-- Navigation -->
+			<nav class="main-nav d-none d-lg-block">
+				<?php
+				wp_nav_menu(array(
+					'theme_location' => 'primary',
+					'container' => false,
+					'menu_class' => 'nav-list d-flex mb-0',
+					'fallback_cb' => false,
+				));
+				?>
+			</nav>
+
+			<!-- Header Icons -->
+			<div class="header-icons d-flex align-items-center">
+				<a href="<?php echo get_permalink(get_option('woocommerce_myaccount_page_id')); ?>" class="header-icon">
+					<i class="bi bi-person"></i>
+				</a>
+				<a href="<?php echo wc_get_cart_url(); ?>" class="header-icon position-relative">
+					<i class="bi bi-cart"></i>
+					<?php if (WC()->cart->get_cart_contents_count() > 0): ?>
+						<span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
+					<?php endif; ?>
+				</a>
+
+				<!-- Mobile Menu Toggle -->
+				<button class="navbar-toggler d-lg-none" type="button" id="mobile-menu-toggle">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+			</div>
+		</div>
+
+		<!-- Mobile Menu -->
+		<nav class="mobile-nav d-lg-none" id="mobile-menu">
 			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
-				)
-			);
+			wp_nav_menu(array(
+				'theme_location' => 'primary',
+				'container' => false,
+				'menu_class' => 'mobile-menu-list list-unstyled mb-0',
+				'fallback_cb' => false,
+			));
 			?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
+		</nav>
+	</header>
