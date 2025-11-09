@@ -323,3 +323,22 @@ add_action('wp_ajax_nopriv_load_more_products', 'load_more_products_ajax');
 
 // disable admin bar 
 add_filter('show_admin_bar', '__return_false');
+
+
+// WooCommerce support
+function awadh_crafts_add_woocommerce_support()
+{
+    add_theme_support('woocommerce', array(
+        'thumbnail_image_width' => 400,
+        'single_image_width' => 800,
+        'product_grid' => array(
+            'default_rows' => 3,
+            'min_rows' => 1,
+            'max_rows' => 6,
+            'default_columns' => 4,
+            'min_columns' => 2,
+            'max_columns' => 6,
+        ),
+    ));
+}
+add_action('after_setup_theme', 'awadh_crafts_add_woocommerce_support');

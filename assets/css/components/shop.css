@@ -1,0 +1,122 @@
+/* Product Cards */
+.product-card {
+  background-color: var(--color-light);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .product-image img {
+    transition: transform 0.4s ease;
+    display: block;
+    width: 100%;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .product-title a {
+    color: var(--color-dark);
+    transition: color 0.3s;
+    &:hover {
+      color: var(--color-primary);
+    }
+  }
+
+  .product-price {
+    font-weight: 700;
+    color: var(--color-primary-dark, var(--color-primary));
+  }
+
+  .add-to-cart {
+    background-color: var(--color-primary);
+    transition: 0.3s;
+    &:hover {
+      background-color: var(--color-primary-light);
+      transform: translateY(-2px);
+    }
+  }
+
+  .product-rating svg {
+    fill: var(--color-primary);
+  }
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: var(--color-light);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  h4,
+  h5 {
+    font-family: var(--font-heading);
+    color: var(--color-dark);
+  }
+  .filter-group {
+    border-bottom: 1px solid var(--color-border, #e0e0e0);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+  }
+  a {
+    color: var(--color-dark);
+    &:hover {
+      color: var(--color-primary);
+    }
+  }
+}
+
+/* Sorting Dropdown */
+.woocommerce-ordering select {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border, #ccc);
+  padding: 0.375rem 0.75rem;
+  transition: all 0.3s ease;
+  &:hover,
+  &:focus {
+    border-color: var(--color-primary);
+  }
+}
+
+/* Showing results text */
+.showing-results {
+  font-size: 0.9rem;
+  color: var(--color-text-muted, #666);
+}
+
+/* Pagination buttons */
+nav .btn {
+  border-radius: var(--radius-sm);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  &:hover {
+    background-color: var(--color-primary-light);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+}
+
+.store-highlights {
+  background-color: var(--color-light);
+  .icon-box {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &.hover-scale:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1);
+    }
+    .icon-box-icon {
+      color: var(--color-primary);
+    }
+    .icon-box-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--color-dark);
+    }
+    p {
+      font-size: 0.9rem;
+      color: var(--color-text);
+    }
+  }
+}

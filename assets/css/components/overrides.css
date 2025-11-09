@@ -60,3 +60,15 @@ a {
 a:hover {
   color: var(--color-primary-light);
 }
+
+.woocommerce .widget_price_filter .ui-slider .ui-slider-handle {
+  background-color: #dc3545;
+}
+
+.woocommerce .widget_price_filter .ui-slider .ui-slider-range {
+  background-color: #dc3545;
+}
+
+.woocommerce .widget_price_filter .price_slider_wrapper .ui-widget-content {
+  background-color: #323232;
+}

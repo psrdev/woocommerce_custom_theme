@@ -1,97 +1,211 @@
 <?php
-/**
- * The Template for displaying product archives, including the main shop page which is a post type archive
- *
- * This template can be overridden by copying it to yourtheme/woocommerce/archive-product.php.
- *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
- * (the theme developer) will need to copy the new files to your theme to
- * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
- * the readme will list any important changes.
- *
- * @see https://woocommerce.com/document/template-structure/
- * @package WooCommerce\Templates
- * @version 8.6.0
- */
-
 defined('ABSPATH') || exit;
+get_header(); ?>
 
-get_header('shop');
+<div class="container my-5">
+    <div class="row">
+        <!-- Sidebar -->
+        <aside class="col-lg-3 mb-4">
+            <div class="sidebar p-3 shadow-sm rounded">
+                <h4 class="mb-4">Filters</h4>
 
-/**
- * Hook: woocommerce_before_main_content.
- *
- * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
- * @hooked woocommerce_breadcrumb - 20
- * @hooked WC_Structured_Data::generate_website_data() - 30
- */
-do_action('woocommerce_before_main_content');
+                <!-- Categories -->
+                <div class="filter-group mb-4">
+                    <h5 class="mb-2">Categories</h5>
+                    <ul class="list-unstyled">
+                        <?php
+                        $categories = get_terms(array(
+                            'taxonomy' => 'product_cat',
+                            'hide_empty' => true,
+                        ));
+                        foreach ($categories as $cat) {
+                            echo '<li><a href="' . get_term_link($cat) . '" class="text-decoration-none">' . $cat->name . ' <span class="text-muted">(' . $cat->count . ')</span></a></li>';
+                        }
+                        ?>
+                    </ul>
+                </div>
 
-/**
- * Hook: woocommerce_shop_loop_header.
- *
- * @since 8.6.0
- *
- * @hooked woocommerce_product_taxonomy_archive_header - 10
- */
-do_action('woocommerce_shop_loop_header');
+                <!-- Price Slider -->
+                <div class="filter-group mb-4">
+                    <h5 class="mb-2">Price</h5>
+                    <?php the_widget('WC_Widget_Price_Filter'); ?>
+                </div>
 
-if (woocommerce_product_loop()) {
 
-    /**
-     * Hook: woocommerce_before_shop_loop.
-     *
-     * @hooked woocommerce_output_all_notices - 10
-     * @hooked woocommerce_result_count - 20
-     * @hooked woocommerce_catalog_ordering - 30
-     */
-    do_action('woocommerce_before_shop_loop');
+            </div>
+        </aside>
 
-    woocommerce_product_loop_start();
+        <!-- Products Section -->
+        <main class="col-lg-9">
+            <!-- Sorting & Showing Results -->
+            <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+                <div class="showing-results mb-2">
+                    <?php
+                    global $wp_query;
+                    $total = $wp_query->found_posts;
+                    $per_page = wc_get_loop_prop('per_page');
+                    $paged = max(1, get_query_var('paged', 1));
+                    $start = ($paged - 1) * $per_page + 1;
+                    $end = min($total, $paged * $per_page);
+                    echo "Showing {$start}–{$end} of {$total} results";
+                    ?>
+                </div>
 
-    if (wc_get_loop_prop('total')) {
-        while (have_posts()) {
-            the_post();
 
-            /**
-             * Hook: woocommerce_shop_loop.
-             */
-            do_action('woocommerce_shop_loop');
+            </div>
 
-            wc_get_template_part('content', 'product');
-        }
-    }
+            <!-- Products Grid -->
+            <?php if (woocommerce_product_loop()): ?>
+                <div class="row g-4">
+                    <?php while (have_posts()):
+                        the_post();
+                        global $product; ?>
+                        <div class="col-sm-6 col-md-4 col-lg-4 d-flex">
+                            <div class="product-card shadow-sm rounded overflow-hidden d-flex flex-column w-100">
+                                <!-- Product Image -->
+                                <a href="<?php the_permalink(); ?>" class="product-image d-block overflow-hidden">
+                                    <?php
+                                    if (has_post_thumbnail()) {
+                                        the_post_thumbnail('medium', ['class' => 'img-fluid']);
+                                    } else {
+                                        echo '<img src="' . wc_placeholder_img_src() . '" class="img-fluid" alt="Placeholder">';
+                                    }
+                                    ?>
+                                </a>
 
-    woocommerce_product_loop_end();
+                                <!-- Product Details -->
+                                <div class="p-3 mt-auto d-flex flex-column">
+                                    <h5 class="product-title mb-2">
+                                        <a href="<?php the_permalink(); ?>"
+                                            class="text-decoration-none text-dark"><?php the_title(); ?></a>
+                                    </h5>
 
-    /**
-     * Hook: woocommerce_after_shop_loop.
-     *
-     * @hooked woocommerce_pagination - 10
-     */
-    do_action('woocommerce_after_shop_loop');
-} else {
-    /**
-     * Hook: woocommerce_no_products_found.
-     *
-     * @hooked wc_no_products_found - 10
-     */
-    do_action('woocommerce_no_products_found');
-}
+                                    <div class="product-price mb-2"><?php echo $product->get_price_html(); ?></div>
 
-/**
- * Hook: woocommerce_after_main_content.
- *
- * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
- */
-do_action('woocommerce_after_main_content');
+                                    <div class="product-rating mb-3">
+                                        <?php if ($product->get_average_rating())
+                                            echo wc_get_rating_html($product->get_average_rating()); ?>
+                                    </div>
 
-/**
- * Hook: woocommerce_sidebar.
- *
- * @hooked woocommerce_get_sidebar - 10
- */
-do_action('woocommerce_sidebar');
+                                    <!-- Product Variations -->
+                                    <?php if ($product->is_type('variable')): ?>
+                                        <div class="product-variations mb-3">
+                                            <?php
+                                            $available_attributes = $product->get_variation_attributes();
+                                            foreach ($available_attributes as $attribute_name => $options):
+                                                $taxonomy = str_replace('attribute_', '', $attribute_name);
+                                                $attribute_label = wc_attribute_label($taxonomy);
+                                                ?>
+                                                <div class="variation-group mb-1">
+                                                    <strong><?php echo esc_html($attribute_label); ?>:</strong>
+                                                    <?php
+                                                    $options_list = array_map(function ($option) use ($taxonomy) {
+                                                        if (taxonomy_exists($taxonomy)) {
+                                                            return esc_html(get_term_by('slug', $option, $taxonomy)->name);
+                                                        }
+                                                        return esc_html($option);
+                                                    }, $options);
 
-get_footer('shop');
+                                                    foreach ($options_list as $key => $opt) {
+                                                        echo "<span class=\"badge bg-secondary me-1\">{$opt}</span>";
+
+                                                    }
+                                                    ?>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <!-- Add to Cart Button -->
+                                    <a href="<?php echo esc_url($product->add_to_cart_url()); ?>"
+                                        class="btn btn-primary w-100 add-to-cart mt-auto">
+                                        <?php echo esc_html($product->add_to_cart_text()); ?>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    <?php endwhile; ?>
+                </div>
+
+                <!-- Pagination -->
+                <nav class="mt-5 d-flex justify-content-center">
+                    <?php
+                    the_posts_pagination(array(
+                        'mid_size' => 2,
+                        'prev_text' => '<span class="btn btn-outline-secondary me-2">« Prev</span>',
+                        'next_text' => '<span class="btn btn-outline-secondary ms-2">Next »</span>',
+                        'before_page_number' => '<span class="btn btn-light me-1">',
+                        'after_page_number' => '</span>',
+                    ));
+                    ?>
+                </nav>
+            <?php else: ?>
+                <p>No products found.</p>
+            <?php endif; ?>
+            <!-- Store Highlights Section -->
+
+        </main>
+
+    </div>
+</div>
+<section class="store-highlights py-5">
+    <div class="container">
+        <div class="row g-4">
+            <!-- Free Shipping -->
+            <div class="col-sm-6 col-lg-3">
+                <div class="icon-box icon-box-side shadow-sm rounded p-3 d-flex align-items-center hover-scale">
+                    <span class="icon-box-icon text-primary fs-3 me-3">
+                        <i class="bi bi-truck"></i> <!-- Bootstrap Icons -->
+                    </span>
+                    <div class="icon-box-content">
+                        <h3 class="icon-box-title mb-1">Free Shipping</h3>
+                        <p class="mb-0">On orders ₹500 or more</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Free Returns -->
+            <div class="col-sm-6 col-lg-3">
+                <div class="icon-box icon-box-side shadow-sm rounded p-3 d-flex align-items-center hover-scale">
+                    <span class="icon-box-icon text-primary fs-3 me-3">
+                        <i class="bi bi-arrow-counterclockwise"></i>
+                    </span>
+                    <div class="icon-box-content">
+                        <h3 class="icon-box-title mb-1">Free Returns</h3>
+                        <p class="mb-0">Within 30 days</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 20% Off Signup -->
+            <div class="col-sm-6 col-lg-3">
+                <div class="icon-box icon-box-side shadow-sm rounded p-3 d-flex align-items-center hover-scale">
+                    <span class="icon-box-icon text-primary fs-3 me-3">
+                        <i class="bi bi-gift"></i>
+                    </span>
+                    <div class="icon-box-content">
+                        <h3 class="icon-box-title mb-1">Get Extra Discount</h3>
+                        <p class="mb-0">On bulk ordering</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 24/7 Support -->
+            <div class="col-sm-6 col-lg-3">
+                <div class="icon-box icon-box-side shadow-sm rounded p-3 d-flex align-items-center hover-scale">
+                    <span class="icon-box-icon text-primary fs-3 me-3">
+                        <i class="bi bi-headset"></i>
+                    </span>
+                    <div class="icon-box-content">
+                        <h3 class="icon-box-title mb-1">We Support</h3>
+                        <p class="mb-0">24/7 amazing services</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<?php get_footer(); ?>
