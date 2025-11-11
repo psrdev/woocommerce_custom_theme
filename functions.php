@@ -342,3 +342,10 @@ function awadh_crafts_add_woocommerce_support()
     ));
 }
 add_action('after_setup_theme', 'awadh_crafts_add_woocommerce_support');
+
+add_filter('woocommerce_blocks_is_feature_enabled', function ($is_enabled, $feature) {
+    if ($feature === 'cart_checkout_blocks') {
+        return false; // disable new blockified cart/checkout
+    }
+    return $is_enabled;
+}, 10, 2);
