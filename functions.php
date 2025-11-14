@@ -351,3 +351,27 @@ add_filter('woocommerce_blocks_is_feature_enabled', function ($is_enabled, $feat
 }, 10, 2);
 
 // add_filter('woocommerce_enqueue_styles', '__return_empty_array');
+
+add_action('wp_enqueue_scripts', function () {
+    wp_enqueue_script('wc-cart-fragments');
+});
+
+add_filter('woocommerce_add_to_cart_fragments', function ($fragments) {
+
+    // Update cart count
+    ob_start();
+    ?>
+    <span class="cart-count">
+        <?php echo WC()->cart->get_cart_contents_count(); ?>
+    </span>
+    <?php
+    $fragments['span.cart-count'] = ob_get_clean();
+
+
+    // Update mini cart content
+    ob_start();
+    woocommerce_mini_cart();
+    $fragments['.mini-cart-dropdown'] = ob_get_clean();
+
+    return $fragments;
+});

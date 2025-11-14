@@ -53,11 +53,14 @@
 				<a href="<?php echo get_permalink(get_option('woocommerce_myaccount_page_id')); ?>" class="header-icon">
 					<i class="bi bi-person"></i>
 				</a>
-				<a href="<?php echo wc_get_cart_url(); ?>" class="header-icon position-relative">
+				<a href="<?php echo wc_get_cart_url(); ?>" class="header-icon position-relative cart-icon-wrapper">
+
 					<i class="bi bi-cart"></i>
-					<?php if (WC()->cart->get_cart_contents_count() > 0): ?>
-						<span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
-					<?php endif; ?>
+
+					<span class="cart-count">
+						<?php echo WC()->cart->get_cart_contents_count(); ?>
+					</span>
+
 				</a>
 
 				<!-- Mobile Menu Toggle -->

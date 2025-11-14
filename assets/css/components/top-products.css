@@ -64,6 +64,9 @@
         display: flex;
         opacity: 0;
         transition: opacity 0.35s ease;
+        .added_to_cart {
+          color: var(--color-white);
+        }
       }
 
       &:hover .product-overlay {

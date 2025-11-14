@@ -69,7 +69,7 @@
 
 		<div class="footer-bottom text-center">
 			<p class="mb-0">
-				© <?php echo date('Y'); ?> <strong>Your Brand</strong>. All Rights Reserved.
+				© <?php echo date('Y'); ?> <strong>Awadh Crafts</strong>. All Rights Reserved.
 			</p>
 		</div>
 	</div>
