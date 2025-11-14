@@ -1,19 +1,31 @@
 import initHeroSlider from "./components/slider.js";
 document.addEventListener('DOMContentLoaded', function () {
     initHeroSlider();
+    initHeaderOnScroll();
 });
 
 document.addEventListener('DOMContentLoaded', function () {
     const mobileToggle = document.getElementById('mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('mobile-nav-overlay');
 
-    if (mobileToggle && mobileMenu) {
-        mobileToggle.addEventListener('click', function () {
-            mobileMenu.classList.toggle('open');
-        });
+    function closeMenu() {
+        mobileMenu.classList.remove('open');
+        overlay.classList.remove('active');
+        mobileToggle.classList.remove('active');
     }
 
-    // Optional: Transparent header on scroll
+    mobileToggle.addEventListener('click', function () {
+        mobileMenu.classList.toggle('open');
+        overlay.classList.toggle('active');
+        mobileToggle.classList.toggle('active');
+    });
+
+    overlay.addEventListener('click', closeMenu);
+});
+
+// header transparency on scroll
+function initHeaderOnScroll() {
     const header = document.querySelector('.site-header');
     if (header) {
         window.addEventListener('scroll', () => {
@@ -24,5 +36,5 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-});
+}
 

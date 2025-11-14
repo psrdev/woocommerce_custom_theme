@@ -68,14 +68,18 @@
 		</div>
 
 		<!-- Mobile Menu -->
-		<nav class="mobile-nav d-lg-none" id="mobile-menu">
-			<?php
-			wp_nav_menu(array(
-				'theme_location' => 'primary',
-				'container' => false,
-				'menu_class' => 'mobile-menu-list list-unstyled mb-0',
-				'fallback_cb' => false,
-			));
-			?>
+		<nav class="mobile-nav-full d-lg-none" id="mobile-menu">
+			<div class="mobile-menu-inner">
+				<?php
+				wp_nav_menu([
+					'theme_location' => 'primary',
+					'container' => false,
+					'menu_class' => 'mobile-menu-list list-unstyled mb-0',
+				]);
+				?>
+			</div>
 		</nav>
+
+		<!-- Overlay -->
+		<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
 	</header>

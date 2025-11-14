@@ -89,7 +89,7 @@
 }
 
 #place_order:hover {
-  background-color: var(--primary-hover-color);
+  background-color: var(--color-primary-light);
 }
 
 /* review order */

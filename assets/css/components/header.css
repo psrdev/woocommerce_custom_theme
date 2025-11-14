@@ -13,10 +13,10 @@
     box-shadow: none;
 
     .nav-list a {
-      color: #fff;
+      color: var(--color-text);
     }
     .header-icon i {
-      color: #fff;
+      color: var(--color-text);
     }
   }
 }
@@ -99,5 +99,126 @@
         color: var(--color-primary);
       }
     }
+  }
+}
+
+#mobile-menu-toggle .navbar-toggler-icon {
+  display: inline-block;
+  width: 22px;
+  height: 2px;
+  background-color: var(--color-dark);
+  position: relative;
+  transition: 0.3s ease;
+}
+
+#mobile-menu-toggle .navbar-toggler-icon::before,
+#mobile-menu-toggle .navbar-toggler-icon::after {
+  content: "";
+  width: 22px;
+  height: 2px;
+  background-color: var(--color-dark);
+  position: absolute;
+  left: 0;
+  transition: 0.3s ease;
+}
+
+#mobile-menu-toggle .navbar-toggler-icon::before {
+  top: -6px;
+}
+
+#mobile-menu-toggle .navbar-toggler-icon::after {
+  top: 6px;
+}
+
+/* Optional animation when active */
+#mobile-menu-toggle.active .navbar-toggler-icon {
+  background-color: transparent;
+}
+
+#mobile-menu-toggle.active .navbar-toggler-icon::before {
+  transform: rotate(45deg);
+  top: 0;
+}
+
+#mobile-menu-toggle.active .navbar-toggler-icon::after {
+  transform: rotate(-45deg);
+  top: 0;
+}
+
+/* ==========================================
+   FULLSCREEN MOBILE MENU
+========================================== */
+.mobile-nav-full {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-white);
+  z-index: 2000;
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  .mobile-menu-inner {
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    transform: translateY(-20px);
+    transition: 0.4s ease;
+  }
+
+  .mobile-menu-list {
+    width: 100%;
+    text-align: center;
+
+    li {
+      margin: 1.2rem 0;
+
+      a {
+        font-size: 1.6rem;
+        font-weight: 600;
+        text-decoration: none;
+        color: var(--color-dark);
+        transition: 0.3s ease;
+
+        &:hover {
+          color: var(--color-primary);
+        }
+      }
+    }
+  }
+
+  /* WHEN MENU IS OPEN */
+  &.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+
+    .mobile-menu-inner {
+      transform: translateY(0);
+    }
+  }
+}
+
+/* ==========================================
+   OVERLAY (behind fullscreen menu)
+========================================== */
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1990;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+
+  &.active {
+    opacity: 1;
+    pointer-events: auto;
   }
 }
