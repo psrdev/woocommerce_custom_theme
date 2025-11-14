@@ -1,0 +1,222 @@
+.checkout-section {
+  background: var(--color-bg);
+
+  .card {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    transition: var(--bs-transition);
+
+    &:hover {
+      box-shadow: var(--shadow-hover);
+    }
+  }
+
+  h3 {
+    font-family: var(--font-heading);
+    color: var(--color-dark);
+    margin-bottom: var(--space-sm);
+  }
+
+  .product-item {
+    transition: var(--bs-transition);
+
+    &:hover {
+      background-color: rgba(var(--bs-primary-rgb), 0.05);
+    }
+
+    .product-thumb img {
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-soft);
+      transition: transform var(--transition-base);
+
+      &:hover {
+        transform: scale(1.08);
+      }
+    }
+
+    .product-info {
+      h6 {
+        font-family: var(--font-body);
+        color: var(--color-dark);
+      }
+      small {
+        color: var(--color-text);
+        opacity: 0.7;
+      }
+    }
+  }
+
+  .place-order {
+    button {
+      width: 100%;
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: var(--space-sm);
+      transition: var(--bs-transition);
+
+      &:hover {
+        background-color: var(--color-primary-light);
+        box-shadow: var(--shadow-hover);
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    .checkout-form,
+    .order-summary {
+      padding: var(--space-sm);
+    }
+  }
+}
+#place_order,
+.woocommerce #place_order,
+.woocommerce-page #place_order,
+.woocommerce button.button.alt,
+.woocommerce-page button.button.alt {
+  background-color: var(--color-primary); /* Your theme variable */
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  margin-top: var(--space-md);
+}
+
+#place_order:hover {
+  background-color: var(--primary-hover-color);
+}
+
+/* review order */
+/* =========================================
+   WooCommerce Checkout - Order Review Styles
+   Matches custom theme variables
+   ========================================= */
+
+.woocommerce-checkout-review-order-table {
+  width: 100%;
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  border: none;
+  overflow: hidden;
+  transition: var(--bs-transition);
+}
+
+.woocommerce-checkout-review-order-table thead {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.woocommerce-checkout-review-order-table thead th {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+  padding: var(--space-sm) var(--space-md);
+  text-transform: uppercase;
+  border: none;
+}
+
+.woocommerce-checkout-review-order-table tbody tr {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.woocommerce-checkout-review-order-table td,
+.woocommerce-checkout-review-order-table th {
+  padding: var(--space-sm) var(--space-md);
+  vertical-align: middle;
+}
+
+.woocommerce-checkout-review-order-table td.product-name {
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+.woocommerce-checkout-review-order-table td.product-name a {
+  color: var(--color-dark);
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--bs-transition);
+}
+
+.woocommerce-checkout-review-order-table td.product-name a:hover {
+  color: var(--color-primary-light);
+}
+
+.woocommerce-checkout-review-order-table td.product-total {
+  font-weight: 600;
+  color: var(--color-dark);
+}
+
+/* Product image inside checkout summary */
+.woocommerce-checkout-review-order-table td.product-name img {
+  width: 60px;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Totals Section */
+.woocommerce-checkout-review-order-table tfoot {
+  background-color: var(--color-bg);
+}
+
+.woocommerce-checkout-review-order-table tfoot th,
+.woocommerce-checkout-review-order-table tfoot td {
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-heading);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.woocommerce-checkout-review-order-table .order-total th,
+.woocommerce-checkout-review-order-table .order-total td {
+  font-size: 1.1rem;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* Responsive tweaks */
+@media (max-width: 576px) {
+  .woocommerce-checkout-review-order-table td.product-name {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .woocommerce-checkout-review-order-table td.product-name img {
+    margin-bottom: var(--space-xs);
+  }
+
+  .woocommerce-checkout-review-order-table thead {
+    display: none;
+  }
+  .woocommerce-checkout-review-order-table
+    tbody
+    tr
+    .woocommerce-checkout-review-order-table
+    tbody
+    tr {
+    display: block;
+    margin-bottom: var(--space-md);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: var(--radius-md);
+    background-color: var(--color-white);
+    padding: var(--space-sm);
+  }
+
+  .woocommerce-checkout-review-order-table td {
+    display: block;
+    text-align: left !important;
+  }
+
+  .woocommerce-checkout-review-order-table td.product-total {
+    margin-top: var(--space-xs);
+    font-weight: 600;
+  }
+}
