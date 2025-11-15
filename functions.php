@@ -380,3 +380,10 @@ add_filter('woocommerce_enable_myaccount_registration', '__return_true');
 add_filter('woocommerce_registration_errors', function ($errors, $username, $password, $email) {
     return $errors;
 }, 10, 4);
+
+add_action('after_setup_theme', function () {
+    add_theme_support('title-tag');
+    add_theme_support('post-thumbnails');
+    add_theme_support('menus');
+    add_theme_support('html5', ['search-form', 'gallery', 'caption']);
+});
