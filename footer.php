@@ -76,6 +76,10 @@
 </footer>
 
 </div><!-- #page -->
+<a href="https://wa.me/91XXXXXXXXXX?text=Hi!%20I%20want%20to%20know%20more%20about%20your%20products."
+	class="whatsapp-float" target="_blank" rel="noopener">
+	<i class="bi bi-whatsapp"></i>
+</a>
 
 <?php wp_footer(); ?>
 
