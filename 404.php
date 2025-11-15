@@ -10,51 +10,36 @@
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
+<main id="primary" class="site-main">
 
-		<section class="error-404 not-found">
-			<header class="page-header">
-				<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'awadh-crafts' ); ?></h1>
-			</header><!-- .page-header -->
+	<section class="error-404 not-found py-5 vh-100 d-flex align-items-center">
+		<div class="container text-center">
 
-			<div class="page-content">
-				<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'awadh-crafts' ); ?></p>
+			<div class="error-wrapper mx-auto p-4 p-md-5 shadow rounded-4">
 
-					<?php
-					get_search_form();
+				<div class="error-icon mb-4">
+					<span>404</span>
+				</div>
 
-					the_widget( 'WP_Widget_Recent_Posts' );
-					?>
+				<h1 class="page-title mb-3">
+					<?php esc_html_e('Oops! That page can’t be found.', 'awadh-crafts'); ?>
+				</h1>
 
-					<div class="widget widget_categories">
-						<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'awadh-crafts' ); ?></h2>
-						<ul>
-							<?php
-							wp_list_categories(
-								array(
-									'orderby'    => 'count',
-									'order'      => 'DESC',
-									'show_count' => 1,
-									'title_li'   => '',
-									'number'     => 10,
-								)
-							);
-							?>
-						</ul>
-					</div><!-- .widget -->
+				<p class="mb-4">
+					<?php esc_html_e('It looks like nothing was found at this location. Try searching or exploring below.', 'awadh-crafts'); ?>
+				</p>
+				<a href="<?php echo esc_url(home_url('/')); ?>" class="btn btn-primary btn-lg rounded-3">
+					<?php esc_html_e('Go to Homepage', 'awadh-crafts'); ?>
+				</a>
 
-					<?php
-					/* translators: %1$s: smiley */
-					$awadh_crafts_archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'awadh-crafts' ), convert_smilies( ':)' ) ) . '</p>';
-					the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$awadh_crafts_archive_content" );
 
-					the_widget( 'WP_Widget_Tag_Cloud' );
-					?>
+			</div>
 
-			</div><!-- .page-content -->
-		</section><!-- .error-404 -->
+		</div>
+	</section>
 
-	</main><!-- #main -->
+
+</main><!-- #main -->
 
 <?php
 get_footer();

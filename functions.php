@@ -375,3 +375,8 @@ add_filter('woocommerce_add_to_cart_fragments', function ($fragments) {
 
     return $fragments;
 });
+
+add_filter('woocommerce_enable_myaccount_registration', '__return_true');
+add_filter('woocommerce_registration_errors', function ($errors, $username, $password, $email) {
+    return $errors;
+}, 10, 4);

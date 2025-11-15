@@ -1,7 +1,7 @@
 <?php
 defined('ABSPATH') || exit;
 get_header(); ?>
-<div class="" style="height: 50vh;  background-color: rgba(0,0,255,.1)"></div>
+
 
 <div class="container my-5">
     <div class="row">

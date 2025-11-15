@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const mobileToggle = document.getElementById('mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     const overlay = document.getElementById('mobile-nav-overlay');
+    const closeBtn = document.getElementById('mobile-menu-close'); // NEW ✔
 
     function closeMenu() {
         mobileMenu.classList.remove('open');
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     overlay.addEventListener('click', closeMenu);
+    closeBtn.addEventListener('click', closeMenu);
 });
 
 // header transparency on scroll

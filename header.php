@@ -73,6 +73,9 @@
 		<!-- Mobile Menu -->
 		<nav class="mobile-nav-full d-lg-none" id="mobile-menu">
 			<div class="mobile-menu-inner">
+				<button class="mobile-menu-close" id="mobile-menu-close">
+					<i class="bi bi-x-lg"></i>
+				</button>
 				<?php
 				wp_nav_menu([
 					'theme_location' => 'primary',
