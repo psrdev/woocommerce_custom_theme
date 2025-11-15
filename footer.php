@@ -31,10 +31,10 @@
 			<div class="col-6 col-md-2 footer-links">
 				<h4 class="footer-title">Quick Links</h4>
 				<ul class="list-unstyled">
-					<li><a href="#">Shop</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Blog</a></li>
-					<li><a href="#">Contact</a></li>
+					<li><a href="/shop">Shop</a></li>
+					<li><a href="/about">About</a></li>
+					<!-- <li><a href="#">Blog</a></li> -->
+					<!-- <li><a href="#">Contact</a></li> -->
 				</ul>
 			</div>
 
@@ -42,10 +42,10 @@
 			<div class="col-6 col-md-2 footer-links">
 				<h4 class="footer-title">Customer Care</h4>
 				<ul class="list-unstyled">
-					<li><a href="#">FAQs</a></li>
-					<li><a href="#">Shipping</a></li>
-					<li><a href="#">Returns</a></li>
-					<li><a href="#">Privacy Policy</a></li>
+					<li><a href="/faq">FAQs</a></li>
+					<!-- <li><a href="#">Shipping</a></li>
+					<li><a href="#">Returns</a></li> -->
+					<li><a href="/privacy-policy">Privacy Policy</a></li>
 				</ul>
 			</div>
 
@@ -76,7 +76,7 @@
 </footer>
 
 </div><!-- #page -->
-<a href="https://wa.me/91XXXXXXXXXX?text=Hi!%20I%20want%20to%20know%20more%20about%20your%20products."
+<a href="https://wa.me/917525968644?text=Hi!%20I%20want%20to%20know%20more%20about%20your%20products."
 	class="whatsapp-float" target="_blank" rel="noopener">
 	<i class="bi bi-whatsapp"></i>
 </a>
