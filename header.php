@@ -27,12 +27,8 @@
 			<!-- Logo -->
 			<div class="site-logo">
 				<a href="<?php echo esc_url(home_url('/')); ?>">
-					<div class="site-logo">
-						<a href="/">
-							<img src="<?php echo esc_url(get_theme_file_uri('/assets/img/logo.png')); ?>"
-								class="custom-logo" alt="Site Name" />
-						</a>
-					</div>
+					<img src="<?php echo esc_url(get_theme_file_uri('/assets/img/logo.png')); ?>" class="custom-logo"
+						alt="Site Logo">
 				</a>
 			</div>
 

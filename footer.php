@@ -58,9 +58,9 @@
 					<button type="submit" class="btn btn-primary">Subscribe</button>
 				</form>
 				<div class="footer-social mt-3">
-					<a href="#"><i class="bi bi-facebook"></i></a>
-					<a href="#"><i class="bi bi-instagram"></i></a>
-					<a href="#"><i class="bi bi-pinterest"></i></a>
+					<a href="https://www.facebook.com/awadhhandicrafts1"><i class="bi bi-facebook"></i></a>
+					<a href="https://www.instagram.com/awadhhandicrafts"><i class="bi bi-instagram"></i></a>
+					<!-- <a href="#"><i class="bi bi-pinterest"></i></a> -->
 				</div>
 			</div>
 		</div>
