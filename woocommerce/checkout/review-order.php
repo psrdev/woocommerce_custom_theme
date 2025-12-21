@@ -93,5 +93,7 @@ defined('ABSPATH') || exit;
             <span><?php wc_cart_totals_order_total_html(); ?></span>
         </div>
 
+
+
     </div>
 </div>

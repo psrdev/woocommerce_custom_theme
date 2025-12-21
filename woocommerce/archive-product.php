@@ -154,33 +154,10 @@ get_header(); ?>
     <div class="container">
         <div class="row g-4">
             <!-- Free Shipping -->
-            <div class="col-sm-6 col-lg-3">
-                <div class="icon-box icon-box-side shadow-sm rounded p-3 d-flex align-items-center hover-scale">
-                    <span class="icon-box-icon text-primary fs-3 me-3">
-                        <i class="bi bi-truck"></i> <!-- Bootstrap Icons -->
-                    </span>
-                    <div class="icon-box-content">
-                        <h3 class="icon-box-title mb-1">Free Shipping</h3>
-                        <p class="mb-0">On orders ₹500 or more</p>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Free Returns -->
-            <div class="col-sm-6 col-lg-3">
-                <div class="icon-box icon-box-side shadow-sm rounded p-3 d-flex align-items-center hover-scale">
-                    <span class="icon-box-icon text-primary fs-3 me-3">
-                        <i class="bi bi-arrow-counterclockwise"></i>
-                    </span>
-                    <div class="icon-box-content">
-                        <h3 class="icon-box-title mb-1">Free Returns</h3>
-                        <p class="mb-0">Within 30 days</p>
-                    </div>
-                </div>
-            </div>
 
             <!-- 20% Off Signup -->
-            <div class="col-sm-6 col-lg-3">
+            <div class="col-sm-6 col-lg-6">
                 <div class="icon-box icon-box-side shadow-sm rounded p-3 d-flex align-items-center hover-scale">
                     <span class="icon-box-icon text-primary fs-3 me-3">
                         <i class="bi bi-gift"></i>
@@ -193,7 +170,7 @@ get_header(); ?>
             </div>
 
             <!-- 24/7 Support -->
-            <div class="col-sm-6 col-lg-3">
+            <div class="col-sm-6 col-lg-6">
                 <div class="icon-box icon-box-side shadow-sm rounded p-3 d-flex align-items-center hover-scale">
                     <span class="icon-box-icon text-primary fs-3 me-3">
                         <i class="bi bi-headset"></i>

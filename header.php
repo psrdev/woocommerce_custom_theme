@@ -22,7 +22,7 @@
 <body <?php body_class(); ?>>
 
 	<header class="site-header fixed-top">
-		<div class="container d-flex align-items-center justify-content-between header-inner">
+		<div class="container d-flex align-items-center justify-content-between header-inner py-3">
 
 			<!-- Logo -->
 			<div class="site-logo">
@@ -44,32 +44,80 @@
 				?>
 			</nav>
 
+			<!-- Search Form (Desktop) -->
+			<div class="header-search d-none d-lg-flex align-items-center ms-4 me-3" style="flex: 1; max-width: 400px;">
+				<form role="search" method="get" class="woocommerce-product-search w-100"
+					action="<?php echo esc_url(home_url('/')); ?>">
+					<div class="input-group border rounded-pill overflow-hidden">
+						<input type="search" class="form-control border-0 ps-3 py-2 search-field"
+							placeholder="<?php echo esc_attr__('Search products...', 'awadh-crafts'); ?>"
+							value="<?php echo get_search_query(); ?>" name="s"
+							aria-label="<?php echo esc_attr__('Search products', 'awadh-crafts'); ?>" />
+						<input type="hidden" name="post_type" value="product" />
+						<button type="submit" class="btn btn-link text-decoration-none px-3 search-button"
+							aria-label="<?php echo esc_attr__('Search', 'awadh-crafts'); ?>">
+							<i class="bi bi-search"></i>
+						</button>
+					</div>
+				</form>
+			</div>
+
 			<!-- Header Icons -->
-			<div class="header-icons d-flex align-items-center">
-				<a href="<?php echo get_permalink(get_option('woocommerce_myaccount_page_id')); ?>" class="header-icon">
-					<i class="bi bi-person"></i>
+			<div class="header-icons d-flex align-items-center gap-3">
+				<!-- Mobile Search Toggle -->
+				<button class="btn btn-link text-dark p-1 d-lg-none search-toggle-btn" type="button"
+					id="mobile-search-toggle" aria-label="Toggle search">
+					<i class="bi bi-search fs-5"></i>
+				</button>
+
+				<a href="<?php echo get_permalink(get_option('woocommerce_myaccount_page_id')); ?>"
+					class="text-dark text-decoration-none" aria-label="My account">
+					<i class="bi bi-person fs-5"></i>
 				</a>
-				<a href="<?php echo wc_get_cart_url(); ?>" class="header-icon position-relative cart-icon-wrapper">
-
-					<i class="bi bi-cart"></i>
-
-					<span class="cart-count">
+				<a href="<?php echo wc_get_cart_url(); ?>" class="text-dark text-decoration-none position-relative"
+					aria-label="Cart">
+					<i class="bi bi-cart fs-5"></i>
+					<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
 						<?php echo WC()->cart->get_cart_contents_count(); ?>
 					</span>
-
 				</a>
 
 				<!-- Mobile Menu Toggle -->
-				<button class="navbar-toggler d-lg-none" type="button" id="mobile-menu-toggle">
+				<button class="navbar-toggler d-lg-none border-0 p-0 ms-2" type="button" id="mobile-menu-toggle"
+					aria-label="Toggle menu">
 					<span class="navbar-toggler-icon"></span>
 				</button>
+			</div>
+		</div>
+
+		<!-- Mobile Search Bar -->
+		<div class="mobile-search-bar bg-white border-top d-lg-none" id="mobile-search-bar">
+			<div class="container py-3">
+				<form role="search" method="get" class="woocommerce-product-search"
+					action="<?php echo esc_url(home_url('/')); ?>">
+					<div class="input-group border rounded-pill overflow-hidden">
+						<input type="search" class="form-control border-0 ps-3 py-2 search-field"
+							placeholder="<?php echo esc_attr__('Search products...', 'awadh-crafts'); ?>"
+							value="<?php echo get_search_query(); ?>" name="s"
+							aria-label="<?php echo esc_attr__('Search products', 'awadh-crafts'); ?>" />
+						<input type="hidden" name="post_type" value="product" />
+						<button type="submit" class="btn btn-link text-decoration-none px-3 search-button"
+							aria-label="<?php echo esc_attr__('Search', 'awadh-crafts'); ?>">
+							<i class="bi bi-search"></i>
+						</button>
+						<button type="button" class="btn btn-link text-decoration-none px-3 search-close-btn"
+							id="mobile-search-close" aria-label="Close search">
+							<i class="bi bi-x"></i>
+						</button>
+					</div>
+				</form>
 			</div>
 		</div>
 
 		<!-- Mobile Menu -->
 		<nav class="mobile-nav-full d-lg-none" id="mobile-menu">
 			<div class="mobile-menu-inner">
-				<button class="mobile-menu-close" id="mobile-menu-close">
+				<button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">
 					<i class="bi bi-x-lg"></i>
 				</button>
 				<?php

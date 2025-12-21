@@ -13,7 +13,8 @@
 @import "components/cart.css";
 @import "components/checkout.css";
 @import "components/myaccount.css";
-@import "components/single-product.css";
+/* @import "components/single-product.css"; */
 @import "components/faq.css";
 @import "components/policy.css";
 @import "components/404.css";
+@import "components/search.css";

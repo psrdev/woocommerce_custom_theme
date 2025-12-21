@@ -1,0 +1,71 @@
+/* Search Component - Minimal Custom CSS */
+/* ====================================== */
+
+/* Variables for consistency */
+:root {
+  --search-border-color: rgba(var(--bs-dark-rgb), 0.15);
+  --search-border-hover: var(--color-primary);
+  --search-transition: var(--transition-base);
+}
+
+/* Mobile Search Bar Animation */
+.mobile-search-bar {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--search-transition);
+  z-index: 1050;
+
+  &.is-active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* Search Input Focus Effects */
+.header-search .input-group:focus-within,
+.mobile-search-bar .input-group:focus-within {
+  border-color: var(--search-border-hover) !important;
+  box-shadow: 0 0 0 1px var(--search-border-hover);
+}
+
+/* Search Button Hover Effects */
+.search-button {
+  transition: all var(--search-transition);
+
+  &:hover {
+    color: var(--color-primary) !important;
+  }
+}
+
+/* Mobile Toggle Button */
+.search-toggle-btn {
+  transition: all var(--search-transition);
+
+  &:hover {
+    color: var(--color-primary) !important;
+    background-color: rgba(var(--bs-primary-rgb), 0.1);
+  }
+}
+
+/* Close Button Hover */
+.search-close-btn:hover {
+  color: var(--color-primary) !important;
+}
+
+/* Prevent body scroll when search is active on mobile */
+body.search-active {
+  overflow: hidden;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+  .header-icons {
+    gap: var(--space-sm);
+  }
+}

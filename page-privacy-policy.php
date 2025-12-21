@@ -7,78 +7,7 @@
 get_header();
 ?>
 
-<style>
-    /* -------------------------
-   Privacy Policy – Styling
-----------------------------*/
-    .privacy-hero {
-        background: var(--color-primary);
-        color: var(--color-white);
-        padding: 80px 0;
-        text-align: center;
-    }
 
-    .privacy-hero h1 {
-        font-size: 2.8rem;
-        font-weight: 700;
-        margin-bottom: 10px;
-    }
-
-    .privacy-hero p {
-        font-size: 1.1rem;
-        opacity: 0.9;
-    }
-
-    .privacy-section {
-        padding: 60px 0;
-        background: var(--color-bg);
-    }
-
-    .privacy-card {
-        background: var(--color-white);
-        border-radius: 14px;
-        padding: 30px 35px;
-        margin-bottom: 30px;
-        box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
-        transition: 0.3s ease;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .privacy-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
-    }
-
-    .privacy-card h3 {
-        font-size: 1.55rem;
-        color: var(--color-primary);
-        margin-bottom: 15px;
-        font-weight: 600;
-    }
-
-    .privacy-card p,
-    .privacy-card li {
-        font-size: 1rem;
-        color: var(--color-text);
-        line-height: 1.7;
-    }
-
-    .privacy-card ul {
-        padding-left: 20px;
-        margin: 0;
-    }
-
-    @media (max-width: 767px) {
-        .privacy-hero h1 {
-            font-size: 2.2rem;
-        }
-
-        .privacy-card {
-            padding: 25px;
-        }
-    }
-</style>
 
 <!-- ==============================
      HERO SECTION
