@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const mobileToggle = document.getElementById('mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     const overlay = document.getElementById('mobile-nav-overlay');
-    const closeBtn = document.getElementById('mobile-menu-close'); // NEW ✔
+    const closeBtn = document.getElementById('mobile-menu-close');
 
     function closeMenu() {
         mobileMenu.classList.remove('open');
@@ -47,7 +47,7 @@ function initHeaderOnScroll() {
  */
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Elements
+
     const searchToggleBtn = document.getElementById('mobile-search-toggle');
     const searchCloseBtn = document.getElementById('mobile-search-close');
     const mobileSearchBar = document.getElementById('mobile-search-bar');
@@ -113,3 +113,74 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    let page = 1;
+    let loading = false;
+    let done = false;
+    let controller = null;
+
+    const wrapper = document.getElementById('products-wrapper');
+    const trigger = document.getElementById('load-more-trigger');
+    const loader = document.getElementById('loader');
+    if (!wrapper || !trigger) return;
+
+    if (!wrapper || !trigger) return;
+
+    const loadMore = async () => {
+        if (loading || done) return;
+
+        loading = true;
+        page++;
+
+        if (controller) controller.abort();
+        controller = new AbortController();
+
+        loader.classList.remove('d-none');
+
+        try {
+            const res = await fetch(
+                `${theme_ajax.url}?action=load_more_products_alt&page=${page}`,
+                { signal: controller.signal }
+            );
+
+            if (!res.ok) throw new Error('Network error');
+
+            const html = await res.text();
+
+            if (!html.trim()) {
+                done = true;
+                observer.disconnect();
+                trigger.remove();
+                return;
+            }
+
+            wrapper.insertAdjacentHTML('beforeend', html);
+        } catch (err) {
+            if (err.name !== 'AbortError') {
+                console.error('Infinite scroll failed:', err);
+            }
+        } finally {
+            loader.classList.add('d-none');
+            loading = false;
+        }
+    };
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            if (entries[0].isIntersecting) {
+                loadMore();
+            }
+        },
+        {
+            root: null,
+            rootMargin: '200px',
+            threshold: 0,
+        }
+    );
+
+    observer.observe(trigger);
+});
+
+
+

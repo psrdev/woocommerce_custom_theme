@@ -1,153 +1,68 @@
 <?php
 defined('ABSPATH') || exit;
-get_header(); ?>
-
+get_header();
+?>
 
 <div class="container my-5">
     <div class="row">
+
         <!-- Sidebar -->
         <aside class="col-lg-3 mb-4">
             <div class="sidebar p-3 shadow-sm rounded">
                 <h4 class="mb-4">Filters</h4>
 
-                <!-- Categories -->
                 <div class="filter-group mb-4">
-                    <h5 class="mb-2">Categories</h5>
+                    <h5>Categories</h5>
                     <ul class="list-unstyled">
                         <?php
-                        $categories = get_terms(array(
+                        $categories = get_terms([
                             'taxonomy' => 'product_cat',
                             'hide_empty' => true,
-                        ));
+                        ]);
                         foreach ($categories as $cat) {
-                            echo '<li><a href="' . get_term_link($cat) . '" class="text-decoration-none">' . $cat->name . ' <span class="text-muted">(' . $cat->count . ')</span></a></li>';
+                            echo '<li><a href="' . esc_url(get_term_link($cat)) . '">' . esc_html($cat->name) . '</a></li>';
                         }
                         ?>
                     </ul>
                 </div>
 
-                <!-- Price Slider -->
                 <div class="filter-group mb-4">
-                    <h5 class="mb-2">Price</h5>
+                    <h5>Price</h5>
                     <?php the_widget('WC_Widget_Price_Filter'); ?>
                 </div>
-
-
             </div>
         </aside>
 
-        <!-- Products Section -->
+        <!-- Products -->
         <main class="col-lg-9">
-            <!-- Sorting & Showing Results -->
-            <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
-                <div class="showing-results mb-2">
-                    <?php
-                    global $wp_query;
-                    $total = $wp_query->found_posts;
-                    $per_page = wc_get_loop_prop('per_page');
-                    $paged = max(1, get_query_var('paged', 1));
-                    $start = ($paged - 1) * $per_page + 1;
-                    $end = min($total, $paged * $per_page);
-                    echo "Showing {$start}–{$end} of {$total} results";
-                    ?>
-                </div>
 
-
-            </div>
-
-            <!-- Products Grid -->
             <?php if (woocommerce_product_loop()): ?>
-                <div class="row g-4">
+
+                <div id="products-wrapper" class="row g-4" data-page="1">
                     <?php while (have_posts()):
                         the_post();
                         global $product; ?>
-                        <div class="col-sm-6 col-md-4 col-lg-4 d-flex">
-                            <div class="product-card shadow-sm rounded overflow-hidden d-flex flex-column w-100">
-                                <!-- Product Image -->
-                                <a href="<?php the_permalink(); ?>" class="product-image d-block overflow-hidden">
-                                    <?php
-                                    if (has_post_thumbnail()) {
-                                        the_post_thumbnail('medium', ['class' => 'img-fluid']);
-                                    } else {
-                                        echo '<img src="' . wc_placeholder_img_src() . '" class="img-fluid" alt="Placeholder">';
-                                    }
-                                    ?>
-                                </a>
 
-                                <!-- Product Details -->
-                                <div class="p-3 mt-auto d-flex flex-column">
-                                    <h5 class="product-title mb-2">
-                                        <a href="<?php the_permalink(); ?>"
-                                            class="text-decoration-none text-dark"><?php the_title(); ?></a>
-                                    </h5>
+                        <?php get_template_part('template-parts/product-card'); ?>
 
-                                    <div class="product-price mb-2"><?php echo $product->get_price_html(); ?></div>
-
-                                    <div class="product-rating mb-3">
-                                        <?php if ($product->get_average_rating())
-                                            echo wc_get_rating_html($product->get_average_rating()); ?>
-                                    </div>
-
-                                    <!-- Product Variations -->
-                                    <?php if ($product->is_type('variable')): ?>
-                                        <div class="product-variations mb-3">
-                                            <?php
-                                            $available_attributes = $product->get_variation_attributes();
-                                            foreach ($available_attributes as $attribute_name => $options):
-                                                $taxonomy = str_replace('attribute_', '', $attribute_name);
-                                                $attribute_label = wc_attribute_label($taxonomy);
-                                                ?>
-                                                <div class="variation-group mb-1">
-                                                    <strong><?php echo esc_html($attribute_label); ?>:</strong>
-                                                    <?php
-                                                    $options_list = array_map(function ($option) use ($taxonomy) {
-                                                        if (taxonomy_exists($taxonomy)) {
-                                                            return esc_html(get_term_by('slug', $option, $taxonomy)->name);
-                                                        }
-                                                        return esc_html($option);
-                                                    }, $options);
-
-                                                    foreach ($options_list as $key => $opt) {
-                                                        echo "<span class=\"badge bg-secondary me-1\">{$opt}</span>";
-
-                                                    }
-                                                    ?>
-                                                </div>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    <?php endif; ?>
-
-                                    <!-- Add to Cart Button -->
-                                    <a href="<?php echo esc_url($product->add_to_cart_url()); ?>"
-                                        class="btn btn-primary w-100 add-to-cart mt-auto">
-                                        <?php echo esc_html($product->add_to_cart_text()); ?>
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
                     <?php endwhile; ?>
                 </div>
+                <?php
+                global $wp_query;
+                $has_more = $wp_query->max_num_pages > 1;
+                ?>
+                <!-- Infinite Scroll Trigger -->
+                <?php if ($has_more): ?>
+                    <div id="load-more-trigger" class="text-center my-4">
+                        <span id="loader" class="spinner-border text-primary d-none"></span>
+                    </div>
+                <?php endif; ?>
 
-                <!-- Pagination -->
-                <nav class="mt-5 d-flex justify-content-center">
-                    <?php
-                    the_posts_pagination(array(
-                        'mid_size' => 2,
-                        'prev_text' => '<span class="btn btn-outline-secondary me-2">« Prev</span>',
-                        'next_text' => '<span class="btn btn-outline-secondary ms-2">Next »</span>',
-                        'before_page_number' => '<span class="btn btn-light me-1">',
-                        'after_page_number' => '</span>',
-                    ));
-                    ?>
-                </nav>
             <?php else: ?>
                 <p>No products found.</p>
             <?php endif; ?>
-            <!-- Store Highlights Section -->
 
         </main>
-
     </div>
 </div>
 <section class="store-highlights py-5">
