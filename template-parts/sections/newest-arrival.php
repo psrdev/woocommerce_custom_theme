@@ -12,7 +12,10 @@ $new_products = new WP_Query($args);
 if ($new_products->have_posts()): ?>
     <section class="new-products-grid py-5">
         <div class="container">
-            <h2 class="section-title mb-4 text-center">New Arrivals</h2>
+            <h2 class="section-title mb-0 text-center">Explore New Lippan Art Designs</h2>
+            <p class="text-center text-muted mb-4">
+                We regularly add new MDF designs to inspire your creativity.
+            </p>
             <div id="product-grid" class="row g-3 g-md-4">
                 <?php while ($new_products->have_posts()):
                     $new_products->the_post();

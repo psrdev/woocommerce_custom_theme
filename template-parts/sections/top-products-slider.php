@@ -26,8 +26,9 @@ if ($top_products->have_posts()):
     ?>
     <section class="top-products-slider py-5 position-relative">
         <div class="container">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="section-title mb-0">Top 10 Products</h2>
+            <div class="d-flex justify-content-between align-items-center mb-4 flex-column">
+                <h2 class="section-title mb-0">Best-Selling Lippan Art Products</h2>
+                <p>Our customers love our MDF bases because they are easy to use and long-lasting.</p>
 
             </div>
 

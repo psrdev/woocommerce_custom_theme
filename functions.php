@@ -409,24 +409,30 @@ add_action('after_setup_theme', function () {
 
 function load_more_products_ajax_alt()
 {
-    $paged = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+    $paged = max(1, intval($_GET['page'] ?? 1));
 
     $taxonomy = '';
     $term = '';
+    $min_price = null;
+    $max_price = null;
 
     if (!empty($_SERVER['HTTP_REFERER'])) {
         $url = esc_url_raw($_SERVER['HTTP_REFERER']);
+        $path = wp_parse_url($url, PHP_URL_PATH);
+        $qs = wp_parse_url($url, PHP_URL_QUERY);
 
-        // Convert URL → WP Query vars
-        $query = wp_parse_url($url);
-        $path = $query['path'] ?? '';
-
-        // Check product category URL
+        // Category detection
         if (strpos($path, '/product-category/') !== false) {
             $parts = explode('/product-category/', trim($path, '/'));
-            $slug = explode('/', end($parts))[0];
+            $term = explode('/', end($parts))[0];
             $taxonomy = 'product_cat';
-            $term = $slug;
+        }
+
+        // Price filter detection
+        if ($qs) {
+            parse_str($qs, $vars);
+            $min_price = isset($vars['min_price']) ? floatval($vars['min_price']) : null;
+            $max_price = isset($vars['max_price']) ? floatval($vars['max_price']) : null;
         }
     }
 
@@ -437,37 +443,48 @@ function load_more_products_ajax_alt()
             'posts_per_page' => 8,
             'paged' => $paged,
             'post_status' => 'publish',
+            'meta_query' => WC()->query->get_meta_query(),
+            'tax_query' => WC()->query->get_tax_query(),
         ]
     );
 
-
     if ($taxonomy && $term) {
-        $args['tax_query'] = array(
-            array(
-                'taxonomy' => $taxonomy,
-                'field' => 'slug',
-                'terms' => $term,
-            ),
-        );
+        $args['tax_query'][] = [
+            'taxonomy' => $taxonomy,
+            'field' => 'slug',
+            'terms' => $term,
+        ];
+    }
+
+    if ($min_price !== null || $max_price !== null) {
+        $args['meta_query'][] = [
+            'key' => '_price',
+            'value' => [
+                $min_price ?? 0,
+                $max_price ?? PHP_INT_MAX,
+            ],
+            'compare' => 'BETWEEN',
+            'type' => 'NUMERIC',
+        ];
     }
 
     $loop = new WP_Query($args);
+
     if (!$loop->have_posts()) {
         wp_die();
     }
 
-    if ($loop->have_posts()) {
-        while ($loop->have_posts()) {
-            $loop->the_post();
-            global $product;
-            $product = wc_get_product(get_the_ID());
-            get_template_part('template-parts/product-card');
-        }
-        wp_reset_postdata();
+    while ($loop->have_posts()) {
+        $loop->the_post();
+        global $product;
+        $product = wc_get_product(get_the_ID());
+        get_template_part('template-parts/product-card');
     }
 
+    wp_reset_postdata();
     wp_die();
 }
+
 
 add_action('wp_ajax_load_more_products_alt', 'load_more_products_ajax_alt');
 add_action('wp_ajax_nopriv_load_more_products_alt', 'load_more_products_ajax_alt');

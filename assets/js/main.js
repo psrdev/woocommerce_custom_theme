@@ -31,7 +31,7 @@ function initHeaderOnScroll() {
     const header = document.querySelector('.site-header');
     if (header) {
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
+            if (window.scrollY > 50) {
                 header.classList.remove('transparent');
             } else {
                 header.classList.add('transparent');

@@ -10,7 +10,10 @@ if (empty($categories) || is_wp_error($categories)) {
 ?>
 <section class="product-category-grid py-5">
     <div class="container">
-        <h2 class="section-title mb-4 text-center">Shop by Category</h2>
+        <h2 class="section-title mb-0 text-center">Shop Premium Craft Categories</h2>
+        <p class="text-center text-muted mb-5">
+            We offer many craft materials to support your creativity.
+        </p>
 
         <div class="row g-3 g-md-4 category-grid">
             <?php foreach ($categories as $index => $category):
